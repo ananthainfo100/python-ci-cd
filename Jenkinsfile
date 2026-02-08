@@ -1,23 +1,33 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "python-ci-cd-app"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
     stages {
 
-      
-        stage('Setup Python') {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/ananthainfo100/python-ci-cd.git',
+                    credentialsId: 'github-creds'
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 sh '''
-                python3 -m venv venv
-                ./venv/bin/pip install --upgrade pip
-                ./venv/bin/pip install -r requirements.txt
+                docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
                 '''
             }
         }
 
-        stage('Test') {
+        stage('Test Container') {
             steps {
                 sh '''
-                ./venv/bin/pytest
+                docker run --rm $IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
@@ -25,10 +35,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                mkdir -p deploy
-                cp app.py deploy/
-                echo "Application deployed to workspace/deploy"
-                ls -l deploy
+                docker rm -f python-app || true
+                docker run -d --name python-app $IMAGE_NAME:$IMAGE_TAG
                 '''
             }
         }
