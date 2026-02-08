@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/USERNAME/python-ci-cd.git'
+                git 'https://github.com/ananthainfo100/python-ci-cd.git'
             }
         }
 
