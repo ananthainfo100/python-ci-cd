@@ -17,8 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                ./venv/bin/activate
-                pytest
+                ./venv/bin/pytest
                 '''
             }
         }
