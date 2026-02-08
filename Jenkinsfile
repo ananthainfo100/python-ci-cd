@@ -3,12 +3,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/ananthainfo100/python-ci-cd.git'
-            }
-        }
-
+      
         stage('Setup Python') {
             steps {
                 sh '''
