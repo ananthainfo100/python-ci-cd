@@ -8,8 +8,8 @@ pipeline {
             steps {
                 sh '''
                 python3 -m venv venv
-                source venv/bin/activate
-                pip install -r requirements.txt
+                ./venv/bin/pip install --upgrade pip
+                ./venv/bin/pip install -r requirements.txt
                 '''
             }
         }
@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                source venv/bin/activate
+                ./venv/bin/activate
                 pytest
                 '''
             }
