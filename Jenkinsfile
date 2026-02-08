@@ -8,14 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/ananthainfo100/python-ci-cd.git',
-                    credentialsId: 'github-creds'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 sh '''
