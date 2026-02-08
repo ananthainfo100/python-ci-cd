@@ -1,0 +1,9 @@
+# Python
+venv/
+__pycache__/
+*.pvc
+.pytest_cache/
+
+
+# OS
+.DS_Store
