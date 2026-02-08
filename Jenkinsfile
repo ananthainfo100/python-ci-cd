@@ -25,8 +25,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                mkdir -p /opt/python-app
-                cp app.py /opt/python-app/
+                mkdir -p deploy
+                cp app.py deploy/
+                echo "Application deployed to workspace/deploy"
+                ls -l deploy
                 '''
             }
         }
