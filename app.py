@@ -3,4 +3,4 @@ def add(a,b):
 
 
 if __name__ == "__main__":
-    print("App result:",add(2,3))
+    print("App result:",add(9,2))
